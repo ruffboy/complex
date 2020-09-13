@@ -3,18 +3,18 @@ services:
 
 
 before_install:
-    - docker build -t js/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t ruffboy/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run js/react-test npm test -- --coverage
+    - docker run ruffboy/react-test npm test -- --coverage
 
 after_success:
-    - docker build -t js/complex-client ./client
-    - docker build -t js/complex-nginx ./nginx
-    - docker build -t js/complex-server ./server
-    - docker build -t js/complex-worker ./worker
+    - docker build -t ruffboy/complex-client ./client
+    - docker build -t ruffboy/complex-nginx ./nginx
+    - docker build -t ruffboy/complex-server ./server
+    - docker build -t ruffboy/complex-worker ./worker
     - echo "$docker_pass" | docker login -u "$docker_id" --password-stdin
-    - docker push js/complex-client
-    - docker push js/complex-nginx 
-    - docker push js/complex-server
-    - docker push js/complex-worker
+    - docker push ruffboy/complex-client
+    - docker push ruffboy/complex-nginx 
+    - docker push ruffboy/complex-server
+    - docker push ruffboy/complex-worker
