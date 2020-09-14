@@ -18,3 +18,16 @@ after_success:
     - docker push ruffboy/complex-nginx 
     - docker push ruffboy/complex-server
     - docker push ruffboy/complex-worker
+
+    deploy:
+        edge: true
+        provider: elasticbeanstalk
+        region: "us-east-1"
+        app: "multi-docker"
+        env: "MultiDocker-env"
+        bucket: "elasticbeanstalk-us-east-1-675489459153"
+        path: "multi-docker"
+        on:
+            branch: "master"
+        access_key_id: $aws_accesskey
+        secret_access_key: $aws_secretkey
